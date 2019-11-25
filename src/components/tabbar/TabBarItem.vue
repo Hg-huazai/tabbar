@@ -28,13 +28,19 @@ export default {
   },
   methods: {
     itemClick() {
-      // console.log(111);
+       console.log(111);
+     if(this.$router.currentRoute.path==this.path){
+        console.log(22);
+        return
+     }
       this.$router.replace(this.path)
     }
   },
   computed: {
     isActive() {
-      return this.$route.path.indexOf(this.path) !== -1
+		
+      return this.$route.path.indexOf(this.path) !== -1 
+      
     }
   }
 }
@@ -50,7 +56,7 @@ export default {
    width: 24px;
    height: 24px;
    margin-top: 3px;
-   vertical-align: middle;      //图片下面会多3px   清除
+   vertical-align: middle;     
    margin-bottom: 2px;
  }
  .active {
