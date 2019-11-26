@@ -6,7 +6,7 @@
     <div v-else>
       <slot name="item-icon-active"></slot>
     </div>
-    <div :class="{active: isActive}">
+    <div :style="activeSstyle">
       <slot name="item-text"></slot>
     </div>
     <!--<img src="../../assets/img/tabbar/home.svg">
@@ -18,7 +18,11 @@
 export default {
   name: "TabBarItem",
   props: {
-    path:String
+    path:String,
+    activeColor: {
+      type: String,
+      default: 'red'
+    }
   },
   data()
   {
@@ -28,9 +32,9 @@ export default {
   },
   methods: {
     itemClick() {
-       console.log(111);
-     if(this.$router.currentRoute.path==this.path){
-        console.log(22);
+      //  console.log(111);
+     if(this.$router.currentRoute.path==this.path){      //就是这个。不用再跳转了  （这是进哥的修改）
+        // console.log(22);
         return
      }
       this.$router.replace(this.path)
@@ -38,9 +42,10 @@ export default {
   },
   computed: {
     isActive() {
-		
       return this.$route.path.indexOf(this.path) !== -1 
-      
+    },
+    activeSstyle() {
+      return this.isActive ? {color : this.activeColor} : {}
     }
   }
 }
